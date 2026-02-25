@@ -1,15 +1,16 @@
-import { useState } from "react";
-
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LoginPage from "./pages/loginPage";
+import RegisterPage from "./pages/registerPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <p className="text-4xl font-bold text-green-700">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
