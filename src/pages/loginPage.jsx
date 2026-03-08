@@ -1,10 +1,18 @@
 import MainLayout from "../components/layout/mainLayout";
-import LoginForm from "../components/auth/loginForm";
+import { LoginFormFeature } from "../features/auth/components/LoginFormFeature";
+import { useAuth } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <MainLayout>
-      <LoginForm />
+      <LoginFormFeature />
     </MainLayout>
   );
 }

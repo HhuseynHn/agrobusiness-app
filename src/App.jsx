@@ -1,16 +1,20 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./pages/loginPage";
-import RegisterPage from "./pages/registerPage";
+import { BrowserRouter } from "react-router-dom";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { AuthProvider } from "./context/AuthContext";
+import { CartFavoritesProvider } from "./context/CartFavoritesContext";
+import { LazyRoutes } from "./routes/LazyRoutes";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <AuthProvider>
+        <CartFavoritesProvider>
+          <BrowserRouter>
+            <LazyRoutes />
+          </BrowserRouter>
+        </CartFavoritesProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
