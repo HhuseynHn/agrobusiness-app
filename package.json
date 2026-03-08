@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,10 +12,19 @@
     "tailwind:init": "tailwindcss init -p"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@reduxjs/toolkit": "^2.11.2",
+    "axios": "^1.13.6",
     "lucide-react": "^0.575.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.13.1"
+    "react-helmet-async": "^3.0.0",
+    "react-hook-form": "^7.71.2",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.13.1",
+    "recharts": "^3.8.0",
+    "redux-persist": "^6.0.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
