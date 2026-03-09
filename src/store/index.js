@@ -10,6 +10,7 @@ import blogReducer from "./slices/blogSlice";
 import filterReducer from "./slices/filterSlice";
 import uiReducer from "./slices/uiSlice";
 import orderReducer from "./slices/orderSlice";
+import reviewReducer from "./slices/reviewSlice";
 
 const rootReducer = combineReducers({
   products: productReducer,
@@ -21,12 +22,13 @@ const rootReducer = combineReducers({
   filter: filterReducer,
   ui: uiReducer,
   orders: orderReducer,
+  reviews: reviewReducer,
 });
 
 const persistConfig = {
   key: "agro-root",
   storage,
-  whitelist: ["cart", "favorites", "ui"],
+  whitelist: ["cart", "favorites", "ui", "reviews"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

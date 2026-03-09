@@ -1,8 +1,8 @@
-import axios from "axios";
 import env from "../../../config/env";
+import axiosInstance from "../../../shared/services/axiosConfig";
 
-const ACCESS_TOKEN_KEY = "agro_access_token";
-const REFRESH_TOKEN_KEY = "agro_refresh_token";
+const ACCESS_TOKEN_KEY = "accessToken";
+const REFRESH_TOKEN_KEY = "refreshToken";
 
 export function getAccessToken() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -24,11 +24,11 @@ export function setTokens({ accessToken, refreshToken }) {
 export function clearTokens() {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   localStorage.removeItem(REFRESH_TOKEN_KEY);
+  localStorage.removeItem("user");
+  localStorage.removeItem("pendingEmail");
 }
 
-export const authClient = axios.create({
-  baseURL: env.api.baseUrl,
-});
+export const authClient = axiosInstance;
 
 let isRefreshing = false;
 let refreshQueue = [];
@@ -145,5 +145,22 @@ export async function refreshToken() {
 
 export function logout() {
   clearTokens();
+}
+
+export function getCurrentUser() {
+  const raw = localStorage.getItem("user");
+  try {
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function getToken() {
+  return getAccessToken();
+}
+
+export function isAuthenticated() {
+  return !!getToken();
 }
 

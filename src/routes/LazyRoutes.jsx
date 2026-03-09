@@ -2,9 +2,9 @@ import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 const HomePage = lazy(() => import("../features/products/pages/HomePage"));
-const LoginPage = lazy(() => import("../pages/loginPage"));
-const RegisterPage = lazy(() => import("../pages/registerPage"));
-const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
+const LoginPage = lazy(() => import("../features/auth/pages/LoginPage"));
+const RegisterPage = lazy(() => import("../features/auth/pages/RegisterPage"));
+const NotFoundPage = lazy(() => import("../shared/pages/NotFoundPage"));
 const ProtectedRoute = lazy(() =>
   import("./ProtectedRoute").then((m) => ({ default: m.ProtectedRoute }))
 );
@@ -18,9 +18,9 @@ const DashboardBlog = lazy(() => import("../modules/dashboard/pages/DashboardBlo
 const DashboardStats = lazy(() => import("../modules/dashboard/pages/DashboardStats"));
 const DashboardSettings = lazy(() => import("../modules/dashboard/pages/DashboardSettings"));
 
-const CartPage = lazy(() => import("../modules/cart/pages/CartPage"));
-const FavoritesPage = lazy(() => import("../modules/favorites/pages/FavoritesPage"));
-const ProductDetailPage = lazy(() => import("../modules/products/pages/ProductDetailPage"));
+const CartPage = lazy(() => import("../features/cart/pages/CartPage"));
+const FavoritesPage = lazy(() => import("../features/favorites/pages/FavoritesPage"));
+const ProductDetailPage = lazy(() => import("../features/products/pages/ProductDetailPage"));
 const FarmerDetailPage = lazy(() => import("../modules/farmers/pages/FarmerDetailPage"));
 
 export function PageFallback() {
