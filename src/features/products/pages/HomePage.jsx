@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { Header } from "../components/Header";
@@ -11,10 +11,12 @@ import { FeaturedSlider } from "../components/FeaturedSlider";
 import { DailyOfferBanner } from "../components/DailyOfferBanner";
 import { BestsellersSlider } from "../components/BestsellersSlider";
 import { FarmersSection } from "../components/FarmersSection";
+import { AgriculturalTips } from "../components/AgriculturalTips";
 import { BlogSection } from "../components/BlogSection";
 import { RecentViewedSlider } from "../components/RecentViewedSlider";
 import { CartToast } from "../components/CartToast";
 import { useProducts } from "../hooks/useProducts";
+import { productService } from "../services/productService";
 import {
   Dialog,
   DialogContent,
@@ -49,6 +51,16 @@ export default function HomePage() {
   );
 
   const { items, loading, hasMore, loadMore } = useProducts(effectiveFilters);
+  const [agData, setAgData] = useState([]);
+  const [agLoading, setAgLoading] = useState(true);
+
+  useEffect(() => {
+    productService
+      .getAgriculturalData()
+      .then((data) => setAgData(Array.isArray(data) ? data : []))
+      .catch(() => setAgData([]))
+      .finally(() => setAgLoading(false));
+  }, []);
 
   const handleFiltersChange = useCallback((newFilters) => {
     setFilters(newFilters);
@@ -121,6 +133,26 @@ export default function HomePage() {
 
         <BestsellersSlider />
         <FarmersSection />
+
+        <section className="mx-auto max-w-7xl px-4 py-10">
+          <h2 className="mb-6 text-xl font-semibold text-emerald-900">
+            Kənd Təsərrüfatı Məsləhətləri
+          </h2>
+          {agLoading ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-64 animate-pulse rounded-xl bg-emerald-100" />
+              ))}
+            </div>
+          ) : agData.length > 0 ? (
+            <AgriculturalTips data={agData} />
+          ) : (
+            <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 py-12 text-center">
+              <p className="text-emerald-600">Məsləhət tapılmadı.</p>
+            </div>
+          )}
+        </section>
+
         <BlogSection />
         <RecentViewedSlider />
       </main>
