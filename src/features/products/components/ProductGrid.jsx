@@ -30,6 +30,7 @@ export function ProductGrid({ products, loading, hasMore, onLoadMore }) {
       {!loading && products.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <p className="text-emerald-700">Məhsul tapılmadı.</p>
+          <p className="mt-1 text-sm text-emerald-500">Filterləri dəyişin və ya daha sonra yenidən cəhd edin.</p>
         </div>
       )}
       {hasMore && products.length > 0 && (

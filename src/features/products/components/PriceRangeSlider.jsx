@@ -24,19 +24,19 @@ export function PriceRangeSlider({ min, max, valueMin, valueMax, onChange }) {
   );
 
   return (
-    <div className="space-y-3">
+    <div className="w-full min-w-0 max-w-full space-y-3 overflow-hidden">
       <div className="flex justify-between text-sm text-emerald-700">
-        <span>{vMin} ₼</span>
-        <span>{vMax} ₼</span>
+        <span className="tabular-nums">{vMin} ₼</span>
+        <span className="tabular-nums">{vMax} ₼</span>
       </div>
-      <div className="flex gap-2">
+      <div className="flex w-full min-w-0 gap-2 overflow-hidden">
         <input
           type="range"
           min={safeMin}
           max={safeMax}
           value={vMin}
           onChange={handleMinChange}
-          className="flex-1 accent-emerald-600"
+          className="w-full min-w-0 flex-1 shrink cursor-pointer accent-emerald-600"
         />
         <input
           type="range"
@@ -44,7 +44,7 @@ export function PriceRangeSlider({ min, max, valueMin, valueMax, onChange }) {
           max={safeMax}
           value={vMax}
           onChange={handleMaxChange}
-          className="flex-1 accent-emerald-600"
+          className="w-full min-w-0 flex-1 shrink cursor-pointer accent-emerald-600"
         />
       </div>
     </div>
